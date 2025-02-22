@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Launch Client &amp; Server" type="CompoundRunConfigurationType">
+    <toRun name="TitanTakedown [client:run]" type="GradleRunConfiguration" />
+    <toRun name="TitanTakedown [server:run]" type="GradleRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>
