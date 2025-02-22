@@ -11,4 +11,11 @@ I ran a Gradle 8.7 with a JDK 21.
 
 Use `./gradlew build`
 
-In the '**app**' folder, a '**build**' folder should have popped up.
+In each source folder 'client', 'server' and 'common', a 'build' should have appeared
+
+# Run
+Run the command 
+
+`gradle client:run` for the client
+
+`gradle server:run` for the server
