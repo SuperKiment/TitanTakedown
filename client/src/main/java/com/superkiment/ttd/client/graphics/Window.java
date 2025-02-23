@@ -1,14 +1,17 @@
-package com.superkiment.ttd.client;
+package com.superkiment.ttd.client.graphics;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
+import static com.superkiment.ttd.client.graphics.Drawing.drawSquare;
+
 public class Window {
     private long window;
     final private int vSync = 1;
     final private int width = 800, height = 600;
+    private boolean isWindowShown = true;
 
     public void init() {
         // Capture des erreurs GLFW
@@ -25,7 +28,7 @@ public class Window {
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
 
         // Création de la fenêtre
-        window = GLFW.glfwCreateWindow(width, height, "Ma Fenêtre LWJGL", 0, 0);
+        window = GLFW.glfwCreateWindow(width, height, SplashText.getRandom(), 0, 0);
         if (window == 0) {
             throw new RuntimeException("Échec de la création de la fenêtre GLFW");
         }
@@ -51,20 +54,31 @@ public class Window {
         GLFW.glfwSwapInterval(vSync);
 
         // Affichage de la fenêtre
-        GLFW.glfwShowWindow(window);
+        if (isWindowShown)
+            GLFW.glfwShowWindow(window);
     }
 
     public void loop() {
-        // Boucle de rendu
         while (!GLFW.glfwWindowShouldClose(window)) {
-            // Nettoyage de l'écran
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 
-            // Rafraîchissement de l'affichage
+            // Dessine le carré
+            GL11.glPushMatrix();
+            GL11.glTranslatef(-0.5f, 0.0f, 0.0f); // Décale à gauche
+            drawSquare(50, 50, 100, 100);
+            GL11.glPopMatrix();
+
+            // Dessine le cercle
+//            GL11.glPushMatrix();
+//            GL11.glTranslatef(0.5f, 0.0f, 0.0f); // Décale à droite
+//            drawCircle();
+//            GL11.glPopMatrix();
+
             GLFW.glfwSwapBuffers(window);
             GLFW.glfwPollEvents();
         }
     }
+
 
     public void cleanup() {
         // Destruction de la fenêtre
