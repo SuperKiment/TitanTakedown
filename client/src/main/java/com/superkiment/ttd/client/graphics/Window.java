@@ -1,17 +1,18 @@
 package com.superkiment.ttd.client.graphics;
 
+import com.superkiment.ttd.client.inputs.Cursor;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
-
-import static com.superkiment.ttd.client.graphics.Drawing.drawSquare;
 
 public class Window {
     private long window;
     final private int vSync = 1;
     final private int width = 800, height = 600;
     private boolean isWindowShown = true;
+    private Cursor cursorPos;
 
     public void init() {
         // Capture des erreurs GLFW
@@ -32,6 +33,8 @@ public class Window {
         if (window == 0) {
             throw new RuntimeException("Échec de la création de la fenêtre GLFW");
         }
+
+        GLFW.glfwSetCursorPosCallback(window, cursorPos = new Cursor());
 
         // Centrage de la fenêtre
         try (var stack = org.lwjgl.system.MemoryStack.stackPush()) {
@@ -64,8 +67,10 @@ public class Window {
 
             // Dessine le carré
             GL11.glPushMatrix();
-            GL11.glTranslatef(-0.5f, 0.0f, 0.0f); // Décale à gauche
-            drawSquare(50, 50, 100, 100);
+
+            GL11.glColor3f(1, 0, 0); // Rouge
+            Drawing.drawSquare((float) Cursor.posX, (float) Cursor.posY, 100, 100);
+
             GL11.glPopMatrix();
 
             // Dessine le cercle
