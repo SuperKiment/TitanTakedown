@@ -9,7 +9,7 @@ public class Drawing {
 
     public static Align align = Align.CORNER;
 
-    enum Align {
+    public enum Align {
         CENTER, CORNER
     }
 
@@ -19,12 +19,16 @@ public class Drawing {
 
     public static void drawSquare(float x, float y, float width, float height) {
         Window w = ClientMain.window;
-        int widthW = w.getWidth();
-        int heightW = w.getHeight();
+        float widthW = w.getWidth();
+        float heightW = w.getHeight();
 
 
-        GL11.glTranslatef(x*2 / widthW - 1f, (y*2 / heightW) - 1f, 0.0f); // Décale à gauch
-        
+//        GL11.glTranslatef(x * 2 * iWidthW - 1f, -y * 2 * iHeightW +1f, 0.0f);
+
+        float iWidthW = 1f / widthW, iHeightW = 1f / heightW;
+
+        float trX = (x * 2f - widthW) * iWidthW, trY = (-y * 2f + heightW) * iHeightW;
+
         GL11.glBegin(GL11.GL_QUADS); // Début du dessin
 
         switch (align) {
@@ -35,10 +39,10 @@ public class Drawing {
                 GL11.glVertex2f(-0.5f, 0.5f); // Haut gauche
             }
             case CORNER -> {
-                GL11.glVertex2f(0, height*2 / heightW); // Bas gauche
-                GL11.glVertex2f(width*2 / widthW, height*2 / heightW); // Bas droit
-                GL11.glVertex2f(width*2 / widthW, 0); // Haut droit
-                GL11.glVertex2f(0, 0); // Haut gauche
+                GL11.glVertex2f(trX, trY + height * 2 * iHeightW); // Bas gauche
+                GL11.glVertex2f(trX + width * 2 * iWidthW, trY + height * 2 * iHeightW); // Bas droit
+                GL11.glVertex2f(trX + width * 2 * iWidthW, trY); // Haut droit
+                GL11.glVertex2f(trX, trY); // Haut gauche
             }
             default -> throw new IllegalStateException("Unexpected value: " + align);
         }

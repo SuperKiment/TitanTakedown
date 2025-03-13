@@ -2,6 +2,8 @@ package com.superkiment.ttd.common;
 
 public class KVector {
     public double x, y, z;
+    private boolean isMagToRecalculate = true;
+    private double mag = 0;
 
     public KVector() {
         this(0, 0, 0);
@@ -21,18 +23,30 @@ public class KVector {
         x += v.x;
         y += v.y;
         z += v.z;
+        this.isMagToRecalculate = true;
     }
 
     public void sub(KVector v) {
         x -= v.x;
         y -= v.y;
         z -= v.z;
+        this.isMagToRecalculate = true;
     }
 
     public void mult(KVector v) {
         x *= v.x;
         y *= v.y;
         z *= v.z;
+        this.isMagToRecalculate = true;
+    }
+
+    public double mag() {
+        if (this.isMagToRecalculate) {
+            mag = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+            this.isMagToRecalculate = false;
+        }
+
+        return mag;
     }
 
     public static KVector add(KVector v1, KVector v2) {

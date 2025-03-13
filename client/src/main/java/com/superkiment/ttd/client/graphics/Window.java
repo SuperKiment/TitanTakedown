@@ -69,7 +69,7 @@ public class Window {
             GL11.glPushMatrix();
 
             GL11.glColor3f(1, 0, 0); // Rouge
-            Drawing.drawSquare((float) Cursor.posX, (float) Cursor.posY, 100, 100);
+            Drawing.drawSquare((float) Cursor.posX, (float) Cursor.posY, 100, 200);
 
             GL11.glPopMatrix();
 
