@@ -1,4 +1,4 @@
-package com.superkiment.utils;
+package com.superkiment.ttd.common.utils;
 
 /**
  * A pair to return two values of different types in one return. getFirst()

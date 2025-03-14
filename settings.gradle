@@ -6,6 +6,12 @@ plugins {
 }
 
 rootProject.name = 'titantakedown'
-include('client')
-include('common')
-include('server')
+include 'client'
+include 'common'
+include 'server'
+include 'testing-ground'
+
+project(":client").projectDir = file("src/client")
+project(":common").projectDir = file("src/common")
+project(":server").projectDir = file("src/server")
+project(":testing-ground").projectDir = file("src/testing-ground")

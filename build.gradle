@@ -28,6 +28,8 @@ subprojects {
     dependencies {
         testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
         implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.3'
+        compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.36'
+        annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.36'
     }
 
     test {
