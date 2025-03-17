@@ -1,7 +1,7 @@
 package com.superkiment.ttd.client.graphics;
 
 import com.superkiment.ttd.client.ClientMain;
-import com.superkiment.ttd.common.KVector;
+import com.superkiment.ttd.common.types.KVector;
 import org.lwjgl.opengl.GL11;
 
 public class Drawing {

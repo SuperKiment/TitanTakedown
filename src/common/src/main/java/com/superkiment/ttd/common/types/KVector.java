@@ -1,4 +1,4 @@
-package com.superkiment.ttd.common;
+package com.superkiment.ttd.common.types;
 
 public class KVector {
     public double x, y, z;
@@ -42,11 +42,31 @@ public class KVector {
 
     public double mag() {
         if (this.isMagToRecalculate) {
-            mag = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+            mag = Math.sqrt(x * x + y * y + z * z);
             this.isMagToRecalculate = false;
         }
 
         return mag;
+    }
+
+    public void setMag(double nouvelleAmplitude) {
+        if (mag == 0) return;
+
+        double facteur = nouvelleAmplitude / mag;
+
+        x *= facteur;
+        y *= facteur;
+        z *= facteur;
+    }
+
+    public void set(KVector dir) {
+        x = dir.x;
+        y = dir.y;
+        z = dir.z;
+    }
+
+    public KVector copy() {
+        return new KVector(x, y, z);
     }
 
     public static KVector add(KVector v1, KVector v2) {

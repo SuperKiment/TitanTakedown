@@ -7,6 +7,8 @@ import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class Window {
     private long window;
     final private int vSync = 1;
@@ -55,6 +57,11 @@ public class Window {
         GLFW.glfwMakeContextCurrent(window);
         GL.createCapabilities();
         GLFW.glfwSwapInterval(vSync);
+
+//        glMatrixMode(GL_PROJECTION);
+//        glLoadIdentity();
+//        glOrtho(0, width, height, 0, -1, 1);
+//        glMatrixMode(GL_MODELVIEW);
 
         // Affichage de la fenêtre
         if (isWindowShown)

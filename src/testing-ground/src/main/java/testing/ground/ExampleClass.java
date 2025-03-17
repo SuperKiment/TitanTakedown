@@ -1,24 +1,23 @@
 package testing.ground;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 @Data
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class ExampleClass {
 
-
     String name;
-    Long id;
+    String id = "ocuou";
     int hp;
     float idk;
 
-    @JsonBackReference
+    @JsonIdentityReference(alwaysAsId = true)
     public ExampleClass parent;
 
-    @JsonManagedReference
+    @JsonIdentityReference(alwaysAsId = true)
     public ExampleClass enfant;
 
     ExampleClass() {
