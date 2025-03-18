@@ -1,5 +1,8 @@
 package com.superkiment.ttd.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.superkiment.ttd.common.Time;
 import com.superkiment.ttd.common.types.KVector;
 import lombok.Data;
@@ -10,6 +13,10 @@ import lombok.Data;
  * @author <a href="https://github/superkiment/">SuperKiment's GitHub</a>
  */
 @Data
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Entity {
     /**
      * Entity's base speed, used to calculate the magnitude of the velocity vector.
@@ -24,7 +31,7 @@ public class Entity {
     /**
      * Unique identifier for this entity in the world
      */
-    public String ID = "";
+    public String id = "";
 
     /**
      * List of hitboxes for this entity, passive and physics.
@@ -45,16 +52,17 @@ public class Entity {
 //    public SayingBox sayingBox;
 
     public Entity() {
-        String characters = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890&éèâêô@àù£";
+//        String characters = "azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN1234567890&éèâêô@àù£";
+        String characters = "abcd";
         try {
             for (int i = 0; i < 20; i++) {
                 int rand = (int) Math.floor(Math.random() * characters.length());
                 char ch = characters.charAt(rand);
 
-                ID += ch;
+                id += ch;
             }
         } catch (Exception e) {
-            ID = "failed to generate";
+            id = "failed to generate";
         }
 
         pos = new KVector();
@@ -142,6 +150,7 @@ public class Entity {
     }
      */
 
+    @JsonIgnore
     public String getClassName() {
         System.out.println("Nom : " + this.getClass().getName().split("entities.")[1]);
         String[] tabl = this.getClass().getName().split("entities.");

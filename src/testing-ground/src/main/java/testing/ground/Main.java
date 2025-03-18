@@ -1,6 +1,7 @@
 package testing.ground;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.superkiment.ttd.common.entity.Entity;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,6 +25,14 @@ public class Main {
 
         } catch (Exception e) {
             System.out.println(e);
+        }
+
+        Entity e = new Entity();
+        mapper = new ObjectMapper();
+        try {
+            System.out.println(mapper.writeValueAsString(e));
+        }catch(Exception ex) {
+            System.out.println(ex);
         }
     }
 }

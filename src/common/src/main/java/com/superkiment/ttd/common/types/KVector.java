@@ -80,4 +80,9 @@ public class KVector {
     public static KVector mult(KVector v1, KVector v2) {
         return new KVector(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
     }
+
+    @Override
+    public String toString() {
+        return "{\"x\":" + x + ",\"y\":" + y + "}";
+    }
 }

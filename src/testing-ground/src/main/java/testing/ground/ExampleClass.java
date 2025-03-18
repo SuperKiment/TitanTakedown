@@ -6,7 +6,8 @@ import lombok.Data;
 @Data
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "id"
+)
 public class ExampleClass {
 
     String name;
@@ -23,7 +24,3 @@ public class ExampleClass {
     ExampleClass() {
     }
 }
-
-
-
-
